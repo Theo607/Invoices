@@ -1,9 +1,9 @@
-import Client;
-import Product;
+package example;
+
 import java.util.Date;
 import java.util.Vector;
 
-class Invoice {
+public class Invoice {
 
     public Client client;
     public Vector<Product> products;
@@ -37,5 +37,9 @@ class Invoice {
                 break;
             }
         }
+    }
+
+    public Vector<Product> getProducts() {
+        return products;
     }
 }

@@ -1,17 +1,17 @@
 import Client;
 import Product;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.Vector;
 
 class Invoice {
 
     public Client client;
-    public ArrayList<Product> products;
+    public Vector<Product> products;
     public Date date;
 
     public Invoice(Client client) {
         this.client = client;
-        this.products = new ArrayList<>();
+        this.products = new Vector<>();
         this.date = new Date();
     }
 
@@ -19,7 +19,23 @@ class Invoice {
         this.products.add(product);
     }
 
-    public void removeProduct(Product product) {
-        this.products.remove(product);
+    public void removeProduct(int id) {
+        for (Product product : products) {
+            if (product.getId() == id) {
+                products.remove(product);
+                break;
+            }
+        }
+    }
+
+    public void editProduct(int id, Product product) {
+        for (Product p : products) {
+            if (p.getId() == id) {
+                p.setName(product.getName());
+                p.setPrice(product.getPrice());
+                p.setQuantity(product.getQuantity());
+                break;
+            }
+        }
     }
 }

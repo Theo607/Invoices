@@ -2,22 +2,12 @@ class Client {
 
     public String name;
     public String address;
-    public String email;
-    public String phone;
-    public String id;
+    public String nip;
 
-    public Client(
-        String name,
-        String address,
-        String email,
-        String phone,
-        String id
-    ) {
+    public Client(String name, String address, String nip) {
         this.name = name;
         this.address = address;
-        this.email = email;
-        this.phone = phone;
-        this.id = id;
+        this.nip = nip;
     }
 
     public String toString() {
@@ -29,14 +19,8 @@ class Client {
             ", address='" +
             address +
             '\'' +
-            ", email='" +
-            email +
-            '\'' +
-            ", phone='" +
-            phone +
-            '\'' +
-            ", id='" +
-            id +
+            ", nip='" +
+            nip +
             '\'' +
             '}'
         );

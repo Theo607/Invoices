@@ -20,22 +20,33 @@ public class Invoice {
     }
 
     public void removeProduct(int id) {
+        int i = 0;
         for (Product product : products) {
-            if (product.getId() == id) {
+            if (i == id) {
                 products.remove(product);
                 break;
             }
+            i++;
         }
     }
 
-    public void editProduct(int id, Product product) {
+    public void editProduct(
+        int id,
+        String name,
+        double price,
+        int quantity,
+        String unit
+    ) {
+        int i = 0;
         for (Product p : products) {
-            if (p.getId() == id) {
-                p.setName(product.getName());
-                p.setPrice(product.getPrice());
-                p.setQuantity(product.getQuantity());
+            if (i == id) {
+                if (name != null && !name.isEmpty()) p.name = name;
+                if (price != null) p.price = price;
+                if (quantity != null) p.quantity = quantity;
+                if (unit != null && !unit.isEmpty()) p.unit = unit;
                 break;
             }
+            i++;
         }
     }
 

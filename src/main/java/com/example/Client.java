@@ -14,17 +14,14 @@ public class Client {
 
     public String toString() {
         return (
-            "Client{" +
-            "name='" +
+            "Client " +
+            "\n name: '" +
             name +
-            '\'' +
-            ", address='" +
+            "\n address: " +
             address +
-            '\'' +
-            ", nip='" +
+            "\n nip: '" +
             nip +
-            '\'' +
-            '}'
+            '\n'
         );
     }
 }

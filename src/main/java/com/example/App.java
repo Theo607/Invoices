@@ -14,9 +14,29 @@ public class App {
         System.out.println("Enter product name: ");
         String product_name = System.console().readLine();
         System.out.println("Enter product price: ");
-        double product_price = Double.parseDouble(System.console().readLine());
+        String input = System.console().readLine();
+        if (input == null || input.isEmpty()) {
+            System.out.println("Invalid input");
+            return;
+        }
+        try {
+            double product_price = Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input");
+            return;
+        }
         System.out.println("Enter product quantity: ");
-        int product_quantity = Integer.parseInt(System.console().readLine());
+        input = System.console().readLine();
+        if (input == null || input.isEmpty()) {
+            System.out.println("Invalid input");
+            return;
+        }
+        try {
+            double product_quantity = Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input");
+            return;
+        }
         System.out.println("Enter unit of measurement: ");
         String product_unit = System.console().readLine();
         Product product = new Product(
@@ -62,18 +82,45 @@ public class App {
         System.out.println("Enter new product name: ");
         String product_name = System.console().readLine();
         System.out.println("Enter new product price: ");
-        double product_price = Double.parseDouble(System.console().readLine());
+        String input = System.console().readLine();
+        if (!input.isEmpty()) try {
+            double product_price = Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid price");
+            return;
+        }
+        else {
+            product_price = null;
+        }
         System.out.println("Enter new product quantity: ");
-        int product_quantity = Integer.parseInt(System.console().readLine());
+        input = System.console().readLine();
+        if (!input.isEmpty()) try {
+            double product_quantity = Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid quantity");
+            return;
+        }
+        else {
+            product_quantity = null;
+        }
+        int product_quantity = Integer.parseInt(input);
         System.out.println("Enter new product unit: ");
         String product_unit = System.console().readLine();
 
+        System.out.println("Save (y, n): ");
+        String save = System.console().readLine();
+        if (!save.contains("y")) {
+            return;
+        }
+        if (product_name.isEmpty()) product_name = null;
+        if (product_unit.isEmpty()) product_unit = null;
         Product product = new Product(
             product_name,
             product_price,
             product_quantity,
             product_unit
         );
+
         current_invoice.editProduct(product_id, product);
     }
 
@@ -99,6 +146,9 @@ public class App {
 
     private void handleCommand(String cmd) {
         switch (cmd) {
+            case "list":
+                listProducts();
+                break;
             case "add":
                 handleAdd();
                 break;
@@ -111,14 +161,26 @@ public class App {
             case "help":
                 handleHelp();
                 break;
+            case "save":
+                handleSave();
+                break;
+            case "quit":
+                System.out.println("Exiting...");
+                System.exit(0);
+                break;
             default:
                 System.out.println("Invalid command");
         }
     }
 
+    private void handleSave() {
+        System.out.println("Saving...");
+    }
+
     private Client clientInit() {
-        String cmd = "n";
-        while (cmd != "y") {
+        String cmd = "";
+        Client client = null;
+        while (!cmd.contains("y")) {
             System.out.println("Firm name: ");
             String firm_name = System.console().readLine();
             System.out.println("Enter address: ");
@@ -126,7 +188,7 @@ public class App {
             System.out.println("Enter NIP: ");
             String nip = System.console().readLine();
 
-            Client client = new Client(firm_name, address, nip);
+            client = new Client(firm_name, address, nip);
 
             System.out.println("Client information: " + client.toString());
             System.out.println("Confirm (y, n): ");
@@ -136,21 +198,28 @@ public class App {
         return client;
     }
 
-    public static void main(String[] args) {
+    public void run() {
         Client current_client = clientInit();
         current_invoice = new Invoice(current_client);
 
         System.out.println("Enter one of the following instructions: ");
+        System.out.println("0. help");
         System.out.println("1. add");
         System.out.println("2. edit");
         System.out.println("3. delete");
         System.out.println("4. exit");
         System.out.println("5. help");
-
+        System.out.println("6. save");
+        String cmd = "";
         while (cmd != "exit") {
             System.out.println("Enter command: ");
-            String cmd = System.console().readLine();
+            cmd = System.console().readLine();
             handleCommand(cmd);
         }
+    }
+
+    public static void main(String[] args) {
+        App app = new App();
+        app.run();
     }
 }

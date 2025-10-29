@@ -14,7 +14,6 @@ public class Client {
 
     public String toString() {
         return (
-            "Client " +
             "\n name: '" +
             name +
             "\n address: " +

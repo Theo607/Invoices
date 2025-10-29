@@ -1,5 +1,6 @@
 package example;
 
+import java.io.IOException;
 import java.util.Vector;
 
 public class App {
@@ -13,7 +14,7 @@ public class App {
         }
         System.out.println("Enter product name: ");
         String product_name = System.console().readLine();
-        System.out.println("Enter product price: ");
+        System.out.println("Enter product price (zl): ");
         double product_price = 0.0;
         String input = System.console().readLine();
         if (input == null || input.isEmpty()) {
@@ -90,7 +91,7 @@ public class App {
         }
         System.out.println("Enter new product name: ");
         String product_name = System.console().readLine();
-        System.out.println("Enter new product price: ");
+        System.out.println("Enter new product price (zl): ");
         input = System.console().readLine();
         double product_price = 0.0;
         if (!input.isEmpty()) try {
@@ -186,7 +187,8 @@ public class App {
     }
 
     private void handleSave() {
-        System.out.println("Saving...");
+        Writer writer = new Writer(current_invoice);
+        writer.writeToPDF();
     }
 
     private Client clientInit() {

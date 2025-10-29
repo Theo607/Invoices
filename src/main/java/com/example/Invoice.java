@@ -53,4 +53,24 @@ public class Invoice {
     public Vector<Product> getProducts() {
         return products;
     }
+
+    public String toString() {
+        String client_information =
+            "Name: " +
+            client.name +
+            "\n" +
+            "Address: " +
+            client.address +
+            "\n" +
+            "NIP: " +
+            client.nip +
+            "\n";
+
+        String products_information = "";
+        for (Product product : products) {
+            products_information += product.toString() + "\n";
+        }
+        String product = "Name   " + "Price   " + "Quantity   " + "Unit";
+        return client_information + product + "\n" + products_information;
+    }
 }

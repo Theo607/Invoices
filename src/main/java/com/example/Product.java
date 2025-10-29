@@ -13,4 +13,10 @@ public class Product {
         this.quantity = quantity;
         this.unit = unit;
     }
+
+    public String toString() {
+        return (
+            name + "   " + price + " zl   " + quantity + "   " + unit + "\n"
+        );
+    }
 }

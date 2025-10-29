@@ -15,8 +15,6 @@ public class Product {
     }
 
     public String toString() {
-        return (
-            name + "   " + price + " zl   " + quantity + "   " + unit + "\n"
-        );
+        return (name + "   " + price + " zl   " + quantity + "   " + unit);
     }
 }

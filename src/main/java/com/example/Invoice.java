@@ -15,6 +15,10 @@ public class Invoice {
         this.date = new Date();
     }
 
+    public Client getClient() {
+        return client;
+    }
+
     public void addProduct(Product product) {
         this.products.add(product);
     }
@@ -68,9 +72,16 @@ public class Invoice {
 
         String products_information = "";
         for (Product product : products) {
-            products_information += product.toString() + "\n";
+            products_information += product.toString() + '\n';
         }
         String product = "Name   " + "Price   " + "Quantity   " + "Unit";
-        return client_information + product + "\n" + products_information;
+        return (
+            date.toString() +
+            '\n' +
+            client_information +
+            product +
+            "\n" +
+            products_information
+        );
     }
 }

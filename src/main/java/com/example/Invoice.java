@@ -34,15 +34,15 @@ public class Invoice {
         int id,
         String name,
         double price,
-        int quantity,
+        double quantity,
         String unit
     ) {
         int i = 0;
         for (Product p : products) {
             if (i == id) {
                 if (name != null && !name.isEmpty()) p.name = name;
-                if (price != null) p.price = price;
-                if (quantity != null) p.quantity = quantity;
+                if (price > 0) p.price = price;
+                if (quantity > 0) p.quantity = quantity;
                 if (unit != null && !unit.isEmpty()) p.unit = unit;
                 break;
             }

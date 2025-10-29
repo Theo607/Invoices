@@ -14,25 +14,27 @@ public class App {
         System.out.println("Enter product name: ");
         String product_name = System.console().readLine();
         System.out.println("Enter product price: ");
+        double product_price = 0.0;
         String input = System.console().readLine();
         if (input == null || input.isEmpty()) {
             System.out.println("Invalid input");
             return;
         }
         try {
-            double product_price = Double.parseDouble(input);
+            product_price = Double.parseDouble(input);
         } catch (NumberFormatException e) {
             System.out.println("Invalid input");
             return;
         }
         System.out.println("Enter product quantity: ");
         input = System.console().readLine();
+        double product_quantity = 0.0;
         if (input == null || input.isEmpty()) {
             System.out.println("Invalid input");
             return;
         }
         try {
-            double product_quantity = Double.parseDouble(input);
+            product_quantity = Double.parseDouble(input);
         } catch (NumberFormatException e) {
             System.out.println("Invalid input");
             return;
@@ -78,32 +80,40 @@ public class App {
         }
         listProducts();
         System.out.println("Enter product id: ");
-        int product_id = Integer.parseInt(System.console().readLine());
+        String input = System.console().readLine();
+        int product_id = 0;
+        try {
+            product_id = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid product id");
+            return;
+        }
         System.out.println("Enter new product name: ");
         String product_name = System.console().readLine();
         System.out.println("Enter new product price: ");
-        String input = System.console().readLine();
+        input = System.console().readLine();
+        double product_price = 0.0;
         if (!input.isEmpty()) try {
-            double product_price = Double.parseDouble(input);
+            product_price = Double.parseDouble(input);
         } catch (NumberFormatException e) {
             System.out.println("Invalid price");
             return;
         }
         else {
-            product_price = null;
+            product_price = 0.0;
         }
         System.out.println("Enter new product quantity: ");
         input = System.console().readLine();
+        double product_quantity = 0.0;
         if (!input.isEmpty()) try {
-            double product_quantity = Double.parseDouble(input);
+            product_quantity = Double.parseDouble(input);
         } catch (NumberFormatException e) {
             System.out.println("Invalid quantity");
             return;
         }
         else {
-            product_quantity = null;
+            product_quantity = 0.0;
         }
-        int product_quantity = Integer.parseInt(input);
         System.out.println("Enter new product unit: ");
         String product_unit = System.console().readLine();
 
@@ -114,14 +124,14 @@ public class App {
         }
         if (product_name.isEmpty()) product_name = null;
         if (product_unit.isEmpty()) product_unit = null;
-        Product product = new Product(
+
+        current_invoice.editProduct(
+            product_id,
             product_name,
             product_price,
             product_quantity,
             product_unit
         );
-
-        current_invoice.editProduct(product_id, product);
     }
 
     private void handleDelete() {
@@ -137,10 +147,12 @@ public class App {
 
     private void handleHelp() {
         System.out.println("Available commands:");
+        System.out.println("list - list all products in the invoice");
         System.out.println("add - add a new product to the invoice");
         System.out.println("edit - edit an existing product in the invoice");
         System.out.println("delete - delete a product from the invoice");
         System.out.println("help - display this help message");
+        System.out.println("save - save the invoice");
         System.out.println("quit - exit the program");
     }
 
@@ -203,7 +215,7 @@ public class App {
         current_invoice = new Invoice(current_client);
 
         System.out.println("Enter one of the following instructions: ");
-        System.out.println("0. help");
+        System.out.println("0. list");
         System.out.println("1. add");
         System.out.println("2. edit");
         System.out.println("3. delete");
